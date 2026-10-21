@@ -1,0 +1,26 @@
+{
+  "skill_name": "moss-t2i",
+  "evals": [
+    {
+      "id": 1,
+      "name": "doc-illustration-basic",
+      "prompt": "我在写一篇关于远程工作的博客，需要一张配图：一个人在家里的书桌前用笔记本电脑，窗外是城市黄昏。帮我生成一张示意图。",
+      "expected_output": "Agent loads the moss-t2i skill, uses scripts/moss_generate.py with a descriptive English prompt and a sensible default size (768x768 / medium), writes a PNG, and reports the absolute path, size, duration and seed to the user. It should also mention that a '示意图' from this model is illustrative rather than a precise technical diagram.",
+      "files": []
+    },
+    {
+      "id": 2,
+      "name": "reproducible-seed-iteration",
+      "prompt": "帮我对着一张图做两个版本对比：'a minimalist ceramic vase on a white background, studio lighting'，一个用 25 步一个用 50 步，其余参数完全一致，我要能看出差别。",
+      "expected_output": "Agent fixes the same --seed for both runs, varies only --quality (speed=25 steps vs quality=50 steps), uses --out with distinct filenames, and reports both paths plus the shared seed so the user can reproduce the comparison.",
+      "files": []
+    },
+    {
+      "id": 3,
+      "name": "wrong-tool-for-architecture-diagram",
+      "prompt": "给我画一张我们微服务系统的架构图，要有 API 网关、认证服务、订单服务、PostgreSQL 和 Redis，箭头要标清楚调用关系。",
+      "expected_output": "Agent recognises this needs a precise technical diagram and does NOT call the image model (or only offers it as an illustrative supplement), producing Mermaid/SVG instead. This tests that the skill's 'when not to use it' section is honoured - while NOT over-generalising it into 'the model cannot render text', which it can.",
+      "files": []
+    }
+  ]
+}
